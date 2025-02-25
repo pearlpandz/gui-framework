@@ -1,0 +1,21 @@
+.resizer {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    width: 0.5rem;
+    height: 100%;
+    padding: 0px;
+    cursor: col-resize;
+    border: 1px solid transparent;
+  }
+  
+  .resizer:hover,
+  .resizing {
+    border-right: 2px solid blue;
+  }
+  
+  .dragging {
+    background-color: var(--tertiary);
+  }

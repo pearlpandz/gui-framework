@@ -1,0 +1,16 @@
+:root {
+  --page-background: #ffffff;
+  --primary: #be2bbb;
+  --secondary: #eee7e7;
+  --tertiary: #fcfafa;
+  --disable: #cdd1d1;
+  --error: #ff5757;
+  --success: #1dce9b;
+  --warning: #ffac25;
+  --info: #009fba;
+  --orange: #e66b00;
+  --black: #000;
+  --gray: #d1d5db;
+  --table-border: #e6e8e8;
+  --white: #fff;
+}

@@ -1,0 +1,83 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    height: 28px;
+
+    .prevPageSelect {
+        height: 28px;
+        width: 28px;
+        padding: 3px 5px;
+        display: flex;
+        align-items: center;
+        background-color: var(--white);
+        margin: 2.288px;
+        position: relative;
+        justify-content: center;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #e9ecef;
+            border-radius: 50%;
+        }
+
+        &.disable {
+            pointer-events: none;
+
+            &:hover {
+                cursor: default;
+                background-color: transparent;
+            }
+        }
+    }
+
+    .nextPageSelect {
+        height: 28px;
+        width: 28px;
+        padding: 3px 5px;
+        display: flex;
+        align-items: center;
+        background-color: var(--white);
+        margin: 2.288px;
+        position: relative;
+        justify-content: center;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #e9ecef;
+            border-radius: 50%;
+        }
+
+        &.disable {
+            pointer-events: none;
+
+            &:hover {
+                cursor: default;
+                background-color: transparent;
+            }
+        }
+    }
+
+    .selectedPage {
+        height: 28px;
+        width: 28px;
+        padding: 3px 5px;
+        display: inline-flex;
+        align-items: center;
+        background-color: var(--white);
+        margin: 2.288px;
+        position: relative;
+        justify-content: center;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #e9ecef;
+        }
+
+        &.active {
+            cursor: pointer;
+            background-color: var(--primary);
+            border-radius: 5px;
+            color: var(--white);
+        }
+    }
+}

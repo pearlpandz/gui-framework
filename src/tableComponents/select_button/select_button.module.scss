@@ -1,0 +1,48 @@
+.button_section {
+  display: flex;
+  align-items: center;
+  gap: 0px 10px;
+
+  .button_selection {
+    border: 1px solid var(--orange);
+    border-radius: 25px;
+    padding: 12px 20px;
+    min-width: 75px;
+    background-color: var(--white);
+    color: var(--black);
+    font-size: 14px;
+    font-weight: 400;
+
+    &.active {
+      background-color: var(--orange);
+      color: var(--white);
+    }
+
+    &.disabled {
+      background-color: var(--disable);
+      color: var(--white);
+      cursor: default;
+      border: 1px solid var(--disable);
+
+      &:hover {
+        background-color: var(--disable);
+        color: var(--white);
+        cursor: default;
+        border: 1px solid var(--disable);
+      }
+    }
+
+    &:hover {
+      background-color: var(--orange);
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    .button_name {
+      font-size: 14px;
+      font-weight: 400;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+}
