@@ -1,6 +1,4 @@
-"use client";
 import React, { forwardRef, ReactNode, useState } from "react";
-import Image from "next/image";
 
 // Styles
 import styles from "./inputText.module.scss";
@@ -94,7 +92,7 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>((props, ref) => {
           onChange={onChange}
         />
         {icon && !inputAdornment && (
-          <Image
+          <img
             className={styles.input_image}
             src={icon}
             alt="icon"

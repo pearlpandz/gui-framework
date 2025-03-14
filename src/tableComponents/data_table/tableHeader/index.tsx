@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 
 // Shared Components
 import Button from "../../button";
@@ -173,7 +172,7 @@ const DataTableHeader: React.FC<DataTableHeaderProps> = (props) => {
               >
                 <span className={styles.column_action_section}>
                   {columnReorder && (
-                    <Image
+                    <img
                       src={order}
                       alt="grabber"
                       className={`${styles.grabber} ${

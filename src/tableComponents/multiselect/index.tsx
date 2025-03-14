@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import Image from "next/image";
 
 // Custom Components
 import InputText from "../input";
@@ -33,6 +32,7 @@ interface MultiSelectProps {
   selectionLimit?: number;
   showSelectAll?: boolean;
   emptyMessage?: string;
+  disabled?:boolean;
   [key: string]: any;
 }
 
@@ -48,6 +48,7 @@ const MultiSelect: React.FC<MultiSelectProps> = (props) => {
     placeholder = "Select values",
     emptyMessage = "No options available",
     className,
+    disabled = false,
     selectionLimit = 0,
     showSelectAll = typeof selectionLimit === "number" && selectionLimit > 0
       ? false
@@ -63,7 +64,7 @@ const MultiSelect: React.FC<MultiSelectProps> = (props) => {
     top: number | string;
     left: number | string;
     width: number | string;
-  }>({ top: 0, left: 0, width:0 });
+  }>({ top: 0, left: 0, width: 0 });
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -159,55 +160,42 @@ const MultiSelect: React.FC<MultiSelectProps> = (props) => {
 
   useEffect(() => {
     // Calculate position whenever query changes
-    if (show && positionRef.current) {
-      calculatePosition(positionRef.current, "change");
+    if (positionRef.current) {
+      calculatePosition(positionRef.current);
     }
-  }, [query]);
+  }, [show, query]);
 
-  const calculatePosition = (dropdown: any, type: string) => {
+  const calculatePosition = (dropdown: any) => {
     const elemRect = dropdown.getBoundingClientRect();
     const viewportHeight = window.innerHeight;
 
     const spaceBelow = viewportHeight - elemRect.bottom;
-    const requiredHeight =
-      document.getElementById("dropdown_list")?.clientHeight;
+    const dropdownHeight =
+      document.getElementById("dropdown_list")?.clientHeight || 195;
 
     // If space below is less than 200px, open the list above the div
     if (spaceBelow < 200) {
-      if (
-        type === "change" &&
-        typeof requiredHeight === "number" &&
-        requiredHeight
-      ) {
-        let _requiredHeight = requiredHeight > 150 ? 0 : requiredHeight / 2 - 10;
-        setPage({
-          top: elemRect.top + window.scrollY - 205 + _requiredHeight,
-          left: elemRect.left,
-          width:elemRect.width,
-        });
-      } else {
-        setPage({
-          top: elemRect.top + window.scrollY - 205,
-          left: elemRect.left,
-          width:elemRect.width,
-        });
-      }
+      setPage({
+        top: elemRect.top + window.scrollY - dropdownHeight - 10,
+        left: elemRect.left,
+        width: elemRect.width,
+      });
     } else {
       // Otherwise, open the list below the div
       setPage({
         top: elemRect.bottom + window.scrollY + 5,
         left: elemRect.left,
-        width:elemRect.width,
+        width: elemRect.width,
       });
     }
   };
 
   const handleClickDropdown = (event: React.MouseEvent<HTMLDivElement>) => {
+    if(disabled) return 
     event.stopPropagation();
     event.preventDefault();
     setShow(!show);
     setQuery("");
-    calculatePosition(positionRef.current, "still"); // Calculate position when clicked
   };
 
   const handleClear = () => {
@@ -226,10 +214,16 @@ const MultiSelect: React.FC<MultiSelectProps> = (props) => {
 
   return (
     <div className={styles.multiselect_container} {...others}>
-      {label && <label className={styles.label}>{label}</label>}
+      {label && (
+        <label className={styles.label}>
+          {label}
+        </label>
+      )}
       <div
-        className={`${styles.multiSelect} ${className}`}
-        onClick={(event: React.MouseEvent<HTMLDivElement>) =>handleClickDropdown(event)}
+        className={`${styles.multiSelect} ${className} ${disabled && styles.disabled}`}
+        onClick={(event: React.MouseEvent<HTMLDivElement>) =>
+          handleClickDropdown(event)
+        }
         ref={positionRef}
       >
         <p className={styles.value}>
@@ -239,7 +233,7 @@ const MultiSelect: React.FC<MultiSelectProps> = (props) => {
               } selected`
             : placeholder}
         </p>
-        <Image src={show ? UP : DOWN} alt={show ? "up-arrow" : "down-arrow"} />
+        <img src={show ? UP : DOWN} alt={show ? "up-arrow" : "down-arrow"} />
       </div>
 
       {show && (
@@ -251,7 +245,8 @@ const MultiSelect: React.FC<MultiSelectProps> = (props) => {
               style={{
                 top: page.top,
                 left: page.left,
-                minWidth:page.width,
+                minWidth: page.width,
+                maxWidth: "250px",
               }}
               ref={wrapperRef}
             >
@@ -266,7 +261,7 @@ const MultiSelect: React.FC<MultiSelectProps> = (props) => {
                     value={query}
                     inputAdornment={
                       query.length > 0 ? (
-                        <Image
+                        <img
                           src={CLEAR}
                           alt="clear"
                           onClick={() => handleClear()}
@@ -275,7 +270,7 @@ const MultiSelect: React.FC<MultiSelectProps> = (props) => {
                           style={{ cursor: "pointer" }}
                         />
                       ) : (
-                        <Image src={SEARCH} alt="search" />
+                        <img src={SEARCH} alt="search" />
                       )
                     }
                   />

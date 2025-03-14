@@ -1,5 +1,4 @@
 import React, { forwardRef, Fragment, ReactNode, useMemo } from "react";
-import Image from "next/image";
 
 // Styles
 import styles from "./button.module.scss";
@@ -38,7 +37,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const handleButton = useMemo(() => {
     if (iconOnly) {
       return (
-        <Image
+        <img
           src={icon}
           alt={label || "button-icon"}
           className={styles.button_icon}
@@ -50,7 +49,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       return (
         <Fragment>
           {icon && (
-            <Image src={icon} alt={label} className={styles.button_icon} />
+            <img src={icon} alt={label} className={styles.button_icon} />
           )}
           {label && <p className={styles.text}>{label}</p>}
           {children}

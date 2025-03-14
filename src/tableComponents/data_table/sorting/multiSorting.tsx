@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import Image from "next/image";
 
 // Assets
 import defaultSort from "../../assets/sort.svg";
@@ -10,7 +9,7 @@ import sortDESC from "../../assets/sort-desc.svg";
 import styles from "./sorting.module.scss";
 
 interface Sorting {
-  sortOrder:number,
+  sortOrder: 0 | 1 | -1,
   sortBy:string
 }
 
@@ -52,21 +51,21 @@ const MultiSorting: React.FC<MultiSortingProps> = (props) => {
     const sortOrder = sorting?.find((a:Sorting) => a.sortBy === column)?.sortOrder;
     if (!sortOrder) {
       return (
-        <Image
+        <img
           className={styles.sort_icon}
           src={defaultSort}
           alt="default_sort"
         />
       );
     } else if (sortOrder === 1) {
-      return <Image className={styles.sort_icon} src={sortASC} alt="sort_asc" />;
+      return <img className={styles.sort_icon} src={sortASC} alt="sort_asc" />;
     } else if (sortOrder === -1) {
       return (
-        <Image className={styles.sort_icon} src={sortDESC} alt="sort_desc" />
+        <img className={styles.sort_icon} src={sortDESC} alt="sort_desc" />
       );
     } else {
       return (
-        <Image
+        <img
           className={styles.sort_icon}
           src={defaultSort}
           alt="default_sort"

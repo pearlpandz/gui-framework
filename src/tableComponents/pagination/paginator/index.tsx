@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Image from "next/image";
 
 // Custom Components
 import { usePagination } from "./usePagination";
@@ -82,7 +81,7 @@ function Paginator(props: PaginatorProps) {
           }
           onClick={() => firstPageSelection()}
         >
-          <Image
+          <img
             src={
               totalCount === 0 || currentPage === 1
                 ? firstPageDisabled
@@ -101,7 +100,7 @@ function Paginator(props: PaginatorProps) {
         }
         onClick={() => prevPageSelection()}
       >
-        <Image
+        <img
           src={
             totalCount === 0 || currentPage === 1 ? prevPageDisabled : prevPage
           }
@@ -133,7 +132,7 @@ function Paginator(props: PaginatorProps) {
         }
         onClick={() => nextPageSelection()}
       >
-        <Image
+        <img
           src={
             totalCount === 0 || currentPage === totalPageCount
               ? nextPageDisabled
@@ -152,7 +151,7 @@ function Paginator(props: PaginatorProps) {
           }
           onClick={() => lastPageSelection()}
         >
-          <Image
+          <img
             src={
               totalCount === 0 || currentPage === totalPageCount
                 ? lastPageDisabled
