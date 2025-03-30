@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 // Custom Components
-import { DataTable } from "./tableComponents/data_table";
-import Pagination from "./tableComponents/pagination";
+import { DataTable } from "./components/data_table";
+import Pagination from "./components/pagination";
 
 // Constants
 import {

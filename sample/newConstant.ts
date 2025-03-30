@@ -1,4 +1,4 @@
-import { FilterMatchMode, FilterOperator } from "../src/tableComponents/data_table/filtering/constant";
+import { FilterMatchMode, FilterOperator } from "../src/components/data_table/filtering/constant";
 
 export const DATA = {
     "time": 16,
